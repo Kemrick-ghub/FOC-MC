@@ -53,9 +53,9 @@
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
         } 
 	      img {
-            width: 100px;
-            height: 100px;
-            margin: 20px;
+            width: 900px;
+            height: 900px;
+            margin: 90px;
             transition: transform 0.3s ease;
         }
 
@@ -115,16 +115,18 @@ footer {
     <button class="button" onclick="and()">Run</button>
     <br>
 
-    <table>
+      <table>
         <tr>
             <td>
-	<img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" />
+                <!-- Toggle images for input states (buttons) -->
+                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
                 <br>
-                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" />
+                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
             </td>
-                <td>
-		    <img id="andGate" src="and2off.PNG" ></td>
-  </td>
+            <td>
+                <!-- AND Gate Image -->
+                <img id="andGate" src="and2off.PNG" alt="AND Gate Output">
+            </td>
         </tr>
     </table>
 
@@ -134,11 +136,14 @@ footer {
 
     <script src="javascript.js"></script>
     <script>
-	     let inputOne = false;
+        // JavaScript functions to handle logic and toggle behavior
+
+        let inputOne = false;
         let inputTwo = false;
 
         function toggleImage() {
             const img = document.getElementById('toggleImage');
+            // Toggle the image to "ON" or "OFF" state
             img.src = inputOne ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputOne = !inputOne;
             updateANDGate();
@@ -146,6 +151,7 @@ footer {
 
         function toggleImage2() {
             const img2 = document.getElementById('toggleImage2');
+            // Toggle the image to "ON" or "OFF" state
             img2.src = inputTwo ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputTwo = !inputTwo;
             updateANDGate();
@@ -153,13 +159,13 @@ footer {
 
         function updateANDGate() {
             const andGate = document.getElementById('andGate');
+            // If both inputs are true (ON), show the "ON" AND gate image
             if (inputOne && inputTwo) {
-                andGate.src = 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png'; 
+                andGate.src = 'and2on.PNG'; // Assuming this image represents AND gate output as 'ON'
             } else {
-                andGate.src = 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png'; 
+                andGate.src = 'and2off.PNG'; // Assuming this image represents AND gate output as 'OFF'
             }
         }
-
    </script>
 
 
