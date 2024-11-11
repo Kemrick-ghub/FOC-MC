@@ -1,13 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>FoC</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FoC - Fundamentals of Computing</title>
 
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+    }
+    header {
+      background-color: #445174;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    section {
+      padding: 30px;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    nav ul li a {
+      color: #343a40;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      color: #007bff;
+      text-decoration: underline;
+    }
+    article {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    article h1 {
+      font-size: 2.5rem;
+      color: #343a40;
+    }
+    footer {
+  background-color: #D38F8F;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 1em;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  animation: footerFloat 2s ease-in-out infinite;
+}
+
+@keyframes footerFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+    footer p {
+      margin: 0;
+    }
+    .project-list a {
+      display: block;
+      padding: 10px;
+      color: black;
+      text-decoration: none;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .project-list a:hover {
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+    }
+	
+.glowing-text {
+  font-size: 3em;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  animation: neonGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlow {
+  0% { text-shadow: 0 0 10px #ff4c4c, 0 0 20px #ff4c4c, 0 0 30px #ff4c4c; }
+  100% { text-shadow: 0 0 30px #ff4c4c, 0 0 40px #ff4c4c, 0 0 50px #ff4c4c; }
+}
+
+	
+  </style>
 </head>
+
 <body>
 
 <header>
@@ -36,8 +136,12 @@
 </section>
 
 <footer>
-  <p>@ Powered by UB</p>
-</footer>
+    <p>&#169; Powered by UB</p>
+  </footer>
 
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIKXbpyZXyX0F5pMQ9DXe5U6wevKbsHqFkhb37lqotfj+ntVws3vZ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1VtqVp87pOuN6q8h5/D9C7i3O4jPHX48j3VcC8cXlmjnp5O89Vu4ol" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQK7+u7jOq5jyO3aX0Q0E7mQOW44u5KN63B7jZ" crossorigin="anonymous"></script>
 </body>
 </html>
