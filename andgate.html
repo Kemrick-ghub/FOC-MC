@@ -118,9 +118,9 @@ footer {
       <table>
         <tr>
             <td>
-                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
+                <img src="button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
                 <br>
-                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
+                <img src="button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
             </td>
             <td>
                 <img id="andGate" src="and2off.PNG" alt="AND Gate Output">
@@ -140,14 +140,14 @@ footer {
 
         function toggleImage() {
             const img = document.getElementById('toggleImage');
-            img.src = inputOne ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
+            img.src = inputOne ? 'button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputOne = !inputOne;
             updateANDGate();
         }
 
         function toggleImage2() {
             const img2 = document.getElementById('toggleImage2');
-            img2.src = inputTwo ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
+            img2.src = inputTwo ? 'button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputTwo = !inputTwo;
             updateANDGate();
         }
