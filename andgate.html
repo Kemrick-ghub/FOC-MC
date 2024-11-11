@@ -124,14 +124,14 @@
     <table>
         <tr>
             <td>
-                <!-- Use relative paths for button images or host them in the 'images' folder -->
-                <img src="images/button-off.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
+                <!-- Keep the button images for toggling -->
+                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
                 <br>
-                <img src="images/button-off.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
+                <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
             </td>
             <td>
-                <!-- AND Gate image will change based on inputs -->
-                <img id="andGate" src="images/and2off.PNG" alt="AND Gate Output" />
+                <!-- Return other images to their original sources -->
+                <img id="andGate" src="and2off.PNG" alt="AND Gate Output">
             </td>
         </tr>
     </table>
@@ -146,14 +146,14 @@
 
         function toggleImage() {
             const img = document.getElementById('toggleImage');
-            img.src = inputOne ? 'images/button-off.png' : 'images/button-on.png'; // Change based on input state
+            img.src = inputOne ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputOne = !inputOne;
             updateANDGate();
         }
 
         function toggleImage2() {
             const img2 = document.getElementById('toggleImage2');
-            img2.src = inputTwo ? 'images/button-off.png' : 'images/button-on.png'; // Change based on input state
+            img2.src = inputTwo ? 'https://www.iconsdb.com/icons/preview/red/button-off-xxl.png' : 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png';
             inputTwo = !inputTwo;
             updateANDGate();
         }
@@ -161,13 +161,12 @@
         function updateANDGate() {
             const andGate = document.getElementById('andGate');
             if (inputOne && inputTwo) {
-                andGate.src = 'images/and-on.png'; // Show AND gate active state
+                andGate.src = 'and2on.PNG';  // Update with the original "ON" AND gate image
             } else {
-                andGate.src = 'images/and-off.png'; // Show AND gate inactive state
+                andGate.src = 'and2off.PNG'; // Return to original "OFF" AND gate image
             }
         }
     </script>
 
 </body>
 </html>
-
