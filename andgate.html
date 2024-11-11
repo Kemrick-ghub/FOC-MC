@@ -123,14 +123,12 @@
 
     <table>
         <tr>
-            <td>
-           
+            <td> 
                 <img src="button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
                 <br>
                 <img src="button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
             </td>
             <td>
-		    
                 <img id="andGate" src="and2off.PNG" alt="AND Gate Output">
             </td>
         </tr>
@@ -157,11 +155,17 @@
         }
 
         function runSimulation() {
+            // Update AND gate output image based on inputs
             const andGate = document.getElementById('andGate');
-            if (inputOne && inputTwo) {
-                andGate.src = 'and2off.PNG';
+
+             if (inputOne && inputTwo) {
+                andGate.src = 'and2on.PNG';  // Both inputs are on
+            } else if (inputOne && !inputTwo) {
+                andGate.src = 'andonoff.PNG';  // Only the top button is on
+            } else if (!inputOne && inputTwo) {
+                andGate.src = 'andoffon.PNG';  // Only the bottom button is on
             } else {
-                andGate.src = 'and2on.PNG';
+                andGate.src = 'and2off.PNG';  // Neither input is on
             }
         }
     </script>
