@@ -7,7 +7,7 @@
     <title>AND Gate Simulation</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
     <style>
-        body {
+	  body {
             background: #f4f4f9;
             font-family: 'Press Start 2P', cursive;
             text-align: center;
@@ -27,8 +27,7 @@
             font-size: 2rem;
             color: #ecf0f1;
         }
-
-        .button {
+ .button {
             background-color: #9b59b6;
             border: none;
             color: white;
@@ -52,9 +51,8 @@
         .button:active {
             transform: scale(1.1);
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        img {
+        } 
+	      img {
             width: 150px;
             height: 100px;
             margin: 20px;
@@ -62,11 +60,10 @@
         }
 
         img:hover {
-            transform: scale(1.1);
+            transform: scale(10px);
             cursor: pointer;
         }
-
-        table {
+	     table {
             width: 100%;
             margin-top: 20px;
         }
@@ -74,8 +71,7 @@
         td {
             text-align: center;
         }
-
-        footer {
+footer {
             background-color: #2c3e50;
             color: white;
             padding: 15px;
@@ -85,8 +81,7 @@
             font-size: 1rem;
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
         }
-
-        a {
+	     a {
             color: #ecf0f1;
             font-size: 1rem;
             text-decoration: none;
@@ -96,12 +91,10 @@
         a:hover {
             color: #f39c12;
         }
-
-        @keyframes imagePulse {
+	     @keyframes imagePulse {
             0%, 100% {
                 transform: scale(1);
             }
-
             50% {
                 transform: scale(1.1);
             }
@@ -110,10 +103,11 @@
         #toggleImage, #toggleImage2 {
             animation: imagePulse 1.5s ease-in-out infinite;
         }
-    </style>
-</head>
 
+</style>
+</head>
 <body>
+
 
     <h1>AND Gate Simulation</h1>
     <h2>Click the buttons below to interact with the AND Gate</h2>
@@ -121,16 +115,14 @@
     <button class="button" onclick="and()">Run</button>
     <br>
 
-    <table>
+      <table>
         <tr>
             <td>
-                <!-- Keep the button images for toggling -->
                 <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage" onclick="toggleImage(); toggleInputOne();" alt="Input 1" />
                 <br>
                 <img src="https://www.iconsdb.com/icons/preview/red/button-off-xxl.png" id="toggleImage2" onclick="toggleImage2(); toggleInputTwo();" alt="Input 2" />
             </td>
             <td>
-                <!-- Return other images to their original sources -->
                 <img id="andGate" src="and2off.PNG" alt="AND Gate Output">
             </td>
         </tr>
@@ -140,7 +132,9 @@
         <p>Powered by UB - <a href="index.html">Back to Home</a></p>
     </footer>
 
+    <script src="javascript.js"></script>
     <script>
+
         let inputOne = false;
         let inputTwo = false;
 
@@ -161,12 +155,13 @@
         function updateANDGate() {
             const andGate = document.getElementById('andGate');
             if (inputOne && inputTwo) {
-                andGate.src = 'and2on.PNG';  // Update with the original "ON" AND gate image
+                andGate.src = 'and2off.PNG'; 
             } else {
-                andGate.src = 'and2off.PNG'; // Return to original "OFF" AND gate image
+                andGate.src = 'https://www.iconsdb.com/icons/preview/green/button-on-xxl.png'; 
             }
         }
-    </script>
+   </script>
+
 
 </body>
-</html>
+</html> 
