@@ -1,54 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ML</title>
-	<style>
-img {
-  float: right;
-}
-.button {
-  background-color: #008CBA; /* Blue */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML - Machine Language Instructions</title>
+
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 2.5rem;
+            color: #f39c12;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        .button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .button:active {
+            transform: scale(1);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        a {
+            font-size: 1.2rem;
+            color: #f39c12;
+            text-decoration: none;
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #34495e;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #9b59b6;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #bdc3c7;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ecf0f1;
+        }
+
+        hr {
+            border: 1px solid #ecf0f1;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+    </style>
 </head>
+
 <body>
 
+<section>
+    <h3>A Simple Interactive Machine Language</h3>
+    <hr>
 
-<h3>A Simple Interactive Machine Language</h3>
+    <p><img id="MLinstrucitons" src="MLblank.png" alt="Machine Language Instructions"></p>
 
-<p>
+    <button class="button" onclick="document.getElementById('MLinstrucitons').src='ML1.png'; document.getElementById('Englishinstrucitons').src='EI1.png'">156C</button><br>
+    <button class="button" onclick="document.getElementById('MLinstrucitons').src='ML2.png'; document.getElementById('Englishinstrucitons').src='EI2.png'">166D</button><br>
+    <button class="button" onclick="document.getElementById('MLinstrucitons').src='ML3.png'; document.getElementById('Englishinstrucitons').src='EI3.png'">5056</button><br>
+    <button class="button" onclick="document.getElementById('MLinstrucitons').src='ML4.png'; document.getElementById('Englishinstrucitons').src='EI4.png'">306E</button><br>
+    <button class="button" onclick="document.getElementById('MLinstrucitons').src='ML5.png'; document.getElementById('Englishinstrucitons').src='EI5.png'">C000</button><br>
 
-<img id="MLinstrucitons" src="MLblank.png" >
+    <p><img id="Englishinstrucitons" src="" alt="English Instructions"></p>
 
+    <a href="index.html">Back to Home</a>
 
-<button class="button" onclick="document.getElementById('MLinstrucitons').src='ML1.png'; document.getElementById('Englishinstrucitons').src='EI1.png'">156C</button><br>
-<button class="button" onclick="document.getElementById('MLinstrucitons').src='ML2.png'; document.getElementById('Englishinstrucitons').src='EI2.png'">166D</button><br>
-<button class="button" onclick="document.getElementById('MLinstrucitons').src='ML3.png'; document.getElementById('Englishinstrucitons').src='EI3.png'">5056</button><br>
-<button class="button" onclick="document.getElementById('MLinstrucitons').src='ML4.png'; document.getElementById('Englishinstrucitons').src='EI4.png'">306E</button><br>
-<button class="button" onclick="document.getElementById('MLinstrucitons').src='ML5.png'; document.getElementById('Englishinstrucitons').src='EI5.png'">C000</button><br>
-<img id="Englishinstrucitons" src="" >
+</section>
 
-
-
-
-
-<a href="index.html">Back to Home</a></h3>
-
-</p>
-
-
-
-
-
+<footer>
+    <p>@ Powered by UB</p>
+</footer>
 
 </body>
 </html>
