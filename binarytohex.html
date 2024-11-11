@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoC</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
-          crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FoC - Project 1: Binary to Hexadecimal</title>
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <style>
         body {
-            background-color: #2c3e50;
             font-family: 'Press Start 2P', cursive;
+            background-color: #2c3e50;
             color: #ecf0f1;
-            text-align: center;
             margin: 0;
             padding: 0;
+            text-align: center;
         }
 
         h2 {
@@ -25,24 +27,20 @@
             margin-top: 20px;
         }
 
-        hr {
-            border-color: #f39c12;
-            width: 50%;
-        }
-
         p {
             font-size: 1.2rem;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
-        #inputBin {
-            font-size: 1.2rem;
-            padding: 10px;
-            margin: 10px 0;
-            border: 2px solid #9b59b6;
-            border-radius: 5px;
-            width: 250px;
-            text-align: center;
+        img {
+            width: 300px;
+            height: auto;
+            margin: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
         }
 
         button {
@@ -51,11 +49,14 @@
             color: white;
             padding: 15px 40px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
             font-size: 18px;
+            margin: 10px 5px;
             cursor: pointer;
             border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 20px;
         }
 
         button:hover {
@@ -65,4 +66,85 @@
 
         button:active {
             transform: scale(1);
-            box-shadow: 0
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #bdc3c7;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ecf0f1;
+        }
+
+       
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 2px solid #9b59b6;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            width: 200px;
+        }
+
+        .result-box {
+            font-size: 1.5rem;
+            color: #f39c12;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            border: 1px solid #ecf0f1;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<section>
+    <h2>Project 1: Binary to Hexadecimal</h2>
+    <hr>    
+    <p><img src="bintohex.jpg" alt="Binary to Hexadecimal Conversion"></p>
+
+    <p>Enter any 4-digit binary number:</p>
+    <input type="number" id="inputBin" value="" maxlength="4">
+
+    <button onclick="binToHex()">Submit</button>
+
+    <p class="result-box">Hexadecimal Value: <span id="demo"></span></p>
+
+    <script>
+        function binToHex() {
+            var x = document.getElementById("inputBin").value;
+            if(x.length === 4 && /^[01]+$/.test(x)) {
+                var hexOut = parseInt(x, 2).toString(16).toUpperCase();
+                document.getElementById("demo").innerHTML = hexOut;
+            } else {
+                document.getElementById("demo").innerHTML = "Please enter a valid 4-digit binary number.";
+            }
+        }
+    </script>
+
+</section>
+
+<a href="index.html">Back to Home</a>
+
+<footer>
+    <p>@ Powered by UB</p>
+</footer>
+
+</body>
+</html>
+
