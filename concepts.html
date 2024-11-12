@@ -153,7 +153,94 @@
   <nav>
     <ul>
       <li><h5><a href="index.html">Course</a></h5></li>
-      <li
+      <li><h5><a href="project.html">Project</a></h5></li>
+      <li><h5><a href="concepts.html">Concepts</a></h5></li>
+      <li><h5><a href="database.html">Databases</a></h5></li>
+      <li><h5><a href="documentation.html">Documentation</a></h5></li>
+      <li><h5><a href="aboutme.html">Dev Team</a></h5></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <div class="image-link-container">
+      <!-- First Image and Link -->
+      <a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link">
+        <img id="relation" src="relation.png" alt="Concepts" />
+        <p>Click on the image for presentation</p>
+      </a>
+
+      <!-- Second Image and Link -->
+      <a href="https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+        <img id="canva" src="1.png" alt="More Concepts" />
+        <p>Click on the image for more concepts</p>
+      </a>
+
+      <!-- Third Link for Video -->
+      <a href="https://www.youtube.com/watch?v=example" id="video-link">
+        <img id="video-thumbnail" src="video-thumbnail.png" alt="Watch Video" />
+        <p>Click here to watch the video</p>
+      </a>
+    </div>
+
+    <br><br>
+
+    <!-- Remove button since it's not needed with the keyboard arrows -->
+  </article>
+</section>
+
+<footer>
+  <p>&#169; @ Powered by Kemrick Rodriguez & Anthony Alberto</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIKXbpyZXyX0F5pMQ9DXe5U6wevKbsHqFkhb37lqotfj+ntVws3vZ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1VtqVp87pOuN6q8h5/D9C7i3O4jPHX48j3VcC8cXlmjnp5O89Vu4ol" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQK7+u7jOq5jyO3aX0Q0E7mQOW44u5KN63B7jZ" crossorigin="anonymous"></script>
+
+<script>
+  const linksAndImages = [
+    {
+      link: "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link",
+      image: "relation.png",
+      alt: "Concepts"
+    },
+    {
+      link: "https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
+      image: "1.png",
+      alt: "More Concepts"
+    },
+    {
+      link: "https://www.youtube.com/watch?v=example",  // Example video link
+      image: "video-thumbnail.png",  // Replace with the actual video thumbnail
+      alt: "Watch Video"
+    }
+  ];
+
+  let currentIndex = 0;
+
+  function switchContent() {
+    const linkElements = document.querySelectorAll('.image-link-container a');
+    const imgElements = document.querySelectorAll('.image-link-container img');
+    const pElements = document.querySelectorAll('.image-link-container p');
+
+    linkElements.forEach((link, index) => {
+      link.href = linksAndImages[currentIndex].link;
+      imgElements[index].src = linksAndImages[currentIndex].image;
+      imgElements[index].alt = linksAndImages[currentIndex].alt;
+      pElements[index].textContent = `Click here for ${linksAndImages[currentIndex].alt}`;
+    });
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "ArrowLeft") {
+      currentIndex = (currentIndex === 0) ? linksAndImages.length - 1 : currentIndex - 1;
+    } else if (event.key === "ArrowRight") {
+      currentIndex = (currentIndex === linksAndImages.length - 1) ? 0 : currentIndex + 1;
+    }
+    switchContent();
+  });
+
+  window.onload = switchContent;
+</script>
 
 </body>
 </html>
