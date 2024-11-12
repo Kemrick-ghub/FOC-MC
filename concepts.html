@@ -88,7 +88,7 @@
       color: white;
       border-radius: 5px;
     }
-    
+
     .glowing-text {
       font-size: 3em;
       font-weight: bold;
@@ -127,135 +127,6 @@
 
 <body>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FoC - Fundamentals of Computing</title>
-
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding-bottom: 80px; /* Space for footer */
-    }
-    header {
-      background-color: #445174;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    header h2 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    section {
-      padding: 30px;
-    }
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    nav ul li {
-      display: inline-block;
-      margin-right: 20px;
-    }
-    nav ul li a {
-      color: #343a40;
-      font-size: 1.2rem;
-      text-decoration: none;
-    }
-    nav ul li a:hover {
-      color: #007bff;
-      text-decoration: underline;
-    }
-    article {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    article h1 {
-      font-size: 2.5rem;
-      color: #343a40;
-    }
-    footer {
-      background-color: #D38F8F;
-      color: #fff;
-      text-align: center;
-      padding: 30px 0;
-      font-size: 1em;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      animation: footerFloat 2s ease-in-out infinite;
-    }
-
-    @keyframes footerFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-    }
-
-    footer p {
-      margin: 0;
-    }
-    .project-list a {
-      display: block;
-      padding: 10px;
-      color: black;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-    .project-list a:hover {
-      background-color: #007bff;
-      color: white;
-      border-radius: 5px;
-    }
-    
-    .glowing-text {
-      font-size: 3em;
-      font-weight: bold;
-      color: #fff;
-      text-transform: uppercase;
-      text-align: center;
-      animation: neonGlow 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonGlow {
-      0% { text-shadow: 0 0 10px #ff4c4c, 0 0 20px #ff4c4c, 0 0 30px #ff4c4c; }
-      100% { text-shadow: 0 0 30px #ff4c4c, 0 0 40px #ff4c4c, 0 0 50px #ff4c4c; }
-    }
-
-    
-    article img {
-      max-width: 100%;
-      height: auto;
-    }
-
-   
-    @media (max-width: 768px) {
-      header h2 {
-        font-size: 1.5rem;
-      }
-      nav ul li {
-        display: block;
-        margin-bottom: 10px;
-      }
-      nav ul li a {
-        font-size: 1rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
 <header>
   <h2><b>Fundamentals of Computing</b></h2>
 </header>
@@ -275,22 +146,16 @@
   <article>
     <center>
       <a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link" id="link1">
-        <img id="relation.png" src="relation.png" alt="Concepts">
+        <img id="image1" src="relation.png" alt="Concepts">
       </a>
-     
       <p>Click on the image above for presentation.</p>
       <p><a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link">Click here for recording.</a></p>
-       
-      
-      <br><br>
-
-      <button onclick="toggleLinks()">Switch Link and Image</button>
     </center>
   </article>
 </section>
 
 <footer>
-  <p>&#169; @ Powered by Kemrick Rodriguez & Anthony Alberto</p>
+  <p>&#169; Powered by Kemrick Rodriguez & Anthony Alberto</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIKXbpyZXyX0F5pMQ9DXe5U6wevKbsHqFkhb37lqotfj+ntVws3vZ" crossorigin="anonymous"></script>
@@ -298,22 +163,46 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQK7+u7jOq5jyO3aX0Q0E7mQOW44u5KN63B7jZ" crossorigin="anonymous"></script>
 
 <script>
-  function toggleLinks() {
-    var link1 = document.getElementById('link1');
-    var image1 = document.getElementById('image1');
-    
-    // Change the image and link when clicked
-    if (link1.href === "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link") {
-      link1.href = "https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton";
-      image1.src = "1.png";
-      image1.alt = "More Concepts";
-    } else {
-      link1.href = "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link";
-      image1.src = "relation.png";
-      image1.alt = "Concepts";
+  // Define the links and images for the switchable content
+  const linksAndImages = [
+    {
+      link: "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link",
+      image: "relation.png",
+      alt: "Concepts"
+    },
+    {
+      link: "https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
+      image: "1.png",
+      alt: "More Concepts"
     }
+  ];
+
+  let currentIndex = 0;
+
+  // Function to switch the link and image
+  function switchContent() {
+    const link1 = document.getElementById('link1');
+    const image1 = document.getElementById('image1');
+
+    link1.href = linksAndImages[currentIndex].link;
+    image1.src = linksAndImages[currentIndex].image;
+    image1.alt = linksAndImages[currentIndex].alt;
   }
+
+  // Event listener for keyboard input (Arrow Left and Arrow Right)
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "ArrowLeft") {
+      currentIndex = (currentIndex === 0) ? linksAndImages.length - 1 : currentIndex - 1; // Go to previous item
+    } else if (event.key === "ArrowRight") {
+      currentIndex = (currentIndex === linksAndImages.length - 1) ? 0 : currentIndex + 1; // Go to next item
+    }
+    switchContent();
+  });
+
+  // Initialize the content on page load
+  window.onload = switchContent;
 </script>
 
 </body>
 </html>
+
