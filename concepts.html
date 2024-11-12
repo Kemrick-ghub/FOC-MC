@@ -109,6 +109,18 @@
       height: auto;
     }
 
+    /* Flexbox layout for side-by-side images and links */
+    .image-link-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .image-link-container a {
+      text-align: center;
+    }
+
     /* Media Queries for responsive design */
     @media (max-width: 768px) {
       header h2 {
@@ -120,6 +132,11 @@
       }
       nav ul li a {
         font-size: 1rem;
+      }
+
+      .image-link-container {
+        flex-direction: column;
+        gap: 15px;
       }
     }
   </style>
@@ -144,18 +161,28 @@
   </nav>
   
   <article>
-    <center>
-      <a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link" id="link1">
-        <img id="image1" src="relation.png" alt="Concepts">
+    <div class="image-link-container">
+      <!-- First Image and Link -->
+      <a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link">
+        <img id="relation" src="relation.png" alt="Concepts" />
+        <p>Click on the image for presentation</p>
       </a>
-      <p>Click on the image above for presentation.</p>
-      <p><a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link">Click here for recording.</a></p>
-    </center>
+
+      <!-- Second Image and Link -->
+      <a href="https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+        <img id="canva" src="1.png" alt="More Concepts" />
+        <p>Click on the image for more concepts</p>
+      </a>
+    </div>
+
+    <br><br>
+
+    <button onclick="toggleLinks()">Switch Links and Images</button>
   </article>
 </section>
 
 <footer>
-  <p>&#169; Powered by Kemrick Rodriguez & Anthony Alberto</p>
+  <p>&#169; @ Powered by Kemrick Rodriguez & Anthony Alberto</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIKXbpyZXyX0F5pMQ9DXe5U6wevKbsHqFkhb37lqotfj+ntVws3vZ" crossorigin="anonymous"></script>
@@ -163,46 +190,27 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQK7+u7jOq5jyO3aX0Q0E7mQOW44u5KN63B7jZ" crossorigin="anonymous"></script>
 
 <script>
-  // Define the links and images for the switchable content
-  const linksAndImages = [
-    {
-      link: "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link",
-      image: "relation.png",
-      alt: "Concepts"
-    },
-    {
-      link: "https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
-      image: "1.png",
-      alt: "More Concepts"
-    }
-  ];
+  function toggleLinks() {
+    var link1 = document.querySelector('#relation').parentElement;
+    var link2 = document.querySelector('#canva').parentElement;
+    
+    // Swap the images and links
+    var tempImage = link1.querySelector('img').src;
+    var tempAlt = link1.querySelector('img').alt;
+    var tempHref = link1.href;
+    var tempText = link1.querySelector('p').textContent;
 
-  let currentIndex = 0;
+    link1.querySelector('img').src = link2.querySelector('img').src;
+    link1.querySelector('img').alt = link2.querySelector('img').alt;
+    link1.href = link2.href;
+    link1.querySelector('p').textContent = link2.querySelector('p').textContent;
 
-  // Function to switch the link and image
-  function switchContent() {
-    const link1 = document.getElementById('link1');
-    const image1 = document.getElementById('image1');
-
-    link1.href = linksAndImages[currentIndex].link;
-    image1.src = linksAndImages[currentIndex].image;
-    image1.alt = linksAndImages[currentIndex].alt;
+    link2.querySelector('img').src = tempImage;
+    link2.querySelector('img').alt = tempAlt;
+    link2.href = tempHref;
+    link2.querySelector('p').textContent = tempText;
   }
-
-  // Event listener for keyboard input (Arrow Left and Arrow Right)
-  document.addEventListener('keydown', function(event) {
-    if (event.key === "ArrowLeft") {
-      currentIndex = (currentIndex === 0) ? linksAndImages.length - 1 : currentIndex - 1; // Go to previous item
-    } else if (event.key === "ArrowRight") {
-      currentIndex = (currentIndex === linksAndImages.length - 1) ? 0 : currentIndex + 1; // Go to next item
-    }
-    switchContent();
-  });
-
-  // Initialize the content on page load
-  window.onload = switchContent;
 </script>
 
 </body>
 </html>
-
