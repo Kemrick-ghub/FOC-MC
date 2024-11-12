@@ -105,8 +105,9 @@
 
     /* Image responsiveness */
     article img {
-      max-width: 100%;
-      height: auto;
+      width: 300px;  /* Fixed width for consistency */
+      height: 200px; /* Fixed height for consistency */
+      object-fit: cover; /* Ensure images are not distorted */
     }
 
     /* Flexbox layout for side-by-side images and links */
@@ -152,106 +153,7 @@
   <nav>
     <ul>
       <li><h5><a href="index.html">Course</a></h5></li>
-      <li><h5><a href="project.html">Project</a></h5></li>
-      <li><h5><a href="concepts.html">Concepts</a></h5></li>
-      <li><h5><a href="database.html">Databases</a></h5></li>
-      <li><h5><a href="documentation.html">Documentation</a></h5></li>
-      <li><h5><a href="aboutme.html">Dev Team</a></h5></li>
-    </ul>
-  </nav>
-  
-  <article>
-    <div class="image-link-container">
-      <!-- First Image and Link -->
-      <a href="https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link">
-        <img id="relation" src="relation.png" alt="Concepts" />
-        <p>Click on the image for presentation</p>
-      </a>
-
-      <!-- Second Image and Link -->
-      <a href="https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
-        <img id="canva" src="1.png" alt="More Concepts" />
-        <p>Click on the image for more concepts</p>
-      </a>
-    </div>
-
-    <br><br>
-
-    <button onclick="toggleLinks()">Switch Links and Images</button>
-  </article>
-</section>
-
-<footer>
-  <p>&#169; @ Powered by Kemrick Rodriguez & Anthony Alberto</p>
-</footer>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIKXbpyZXyX0F5pMQ9DXe5U6wevKbsHqFkhb37lqotfj+ntVws3vZ" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1VtqVp87pOuN6q8h5/D9C7i3O4jPHX48j3VcC8cXlmjnp5O89Vu4ol" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQK7+u7jOq5jyO3aX0Q0E7mQOW44u5KN63B7jZ" crossorigin="anonymous"></script>
-
-  <script>
-  // Define the links and images for the switchable content
-  const linksAndImages = [
-    {
-      link: "https://docs.google.com/presentation/d/1zFTQvDovmf-_4ziWF8_uRQY66euPGJA0zHRa98b_9vQ/edit?usp=drive_link",
-      image: "relation.png",
-      alt: "Concepts"
-    },
-    {
-      link: "https://www.canva.com/design/DAGVEGDOdLQ/mvLblTdIaCvLiLfD_epNjw/edit?utm_content=DAGVEGDOdLQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
-      image: "1.png",
-      alt: "More Concepts"
-    }
-  ];
-
-  let currentIndex = 0;
-
-  // Function to switch the link and image
-  function switchContent() {
-    const link1 = document.getElementById('link1');
-    const image1 = document.getElementById('image1');
-
-    link1.href = linksAndImages[currentIndex].link;
-    image1.src = linksAndImages[currentIndex].image;
-    image1.alt = linksAndImages[currentIndex].alt;
-  }
-
-  // Event listener for keyboard input (Arrow Left and Arrow Right)
-  document.addEventListener('keydown', function(event) {
-    if (event.key === "ArrowLeft") {
-      currentIndex = (currentIndex === 0) ? linksAndImages.length - 1 : currentIndex - 1; // Go to previous item
-    } else if (event.key === "ArrowRight") {
-      currentIndex = (currentIndex === linksAndImages.length - 1) ? 0 : currentIndex + 1; // Go to next item
-    }
-    switchContent();
-  });
-
-  // Initialize the content on page load
-  window.onload = switchContent;
-</script>
-
-<script>
-  function toggleLinks() {
-    var link1 = document.querySelector('#relation').parentElement;
-    var link2 = document.querySelector('#canva').parentElement;
-    
-    // Swap the images and links
-    var tempImage = link1.querySelector('img').src;
-    var tempAlt = link1.querySelector('img').alt;
-    var tempHref = link1.href;
-    var tempText = link1.querySelector('p').textContent;
-
-    link1.querySelector('img').src = link2.querySelector('img').src;
-    link1.querySelector('img').alt = link2.querySelector('img').alt;
-    link1.href = link2.href;
-    link1.querySelector('p').textContent = link2.querySelector('p').textContent;
-
-    link2.querySelector('img').src = tempImage;
-    link2.querySelector('img').alt = tempAlt;
-    link2.href = tempHref;
-    link2.querySelector('p').textContent = tempText;
-  }
-</script>
+      <li
 
 </body>
 </html>
