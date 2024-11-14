@@ -124,4 +124,11 @@ function update() {
 
     // Update Sonic position
     sonic.style.left = newX + 'px';
-    sonic.style.top =
+    sonic.style.top = newY + 'px';
+
+    // Continue the animation
+    requestAnimationFrame(update);
+}
+
+// Start the game loop
+update();
