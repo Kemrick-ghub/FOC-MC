@@ -23,6 +23,23 @@ let upPressed = false;
 
 let score = 0; // Score variable to track collected rings
 
+// Timer variables
+let timeLeft = 1000; // Start the timer at 10 seconds
+let timerInterval;
+let isTimerPaused = false; // Flag to control if the timer is paused
+
+// Create a new div for the timer display
+const timerDisplay = document.createElement('div');
+timerDisplay.style.position = 'absolute';
+timerDisplay.style.top = '10px';
+timerDisplay.style.left = '50%';
+timerDisplay.style.transform = 'translateX(-50%)';
+timerDisplay.style.fontSize = '30px';
+timerDisplay.style.color = 'white';
+timerDisplay.style.zIndex = '9999';
+timerDisplay.textContent = `Time: ${timeLeft.toFixed(2)}`;
+document.body.appendChild(timerDisplay);
+
 // Start the background music when the game starts
 backgroundMusic.play();
 
@@ -36,6 +53,19 @@ document.addEventListener('keydown', function(e) {
         upPressed = true;
         jumpSound.play(); // Play jump sound when jump is triggered
     }
+
+    // Handle Konami Code input
+    if (e.keyCode === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            // Konami code completed successfully, trigger Easter egg
+            isKonamiCodeActive = true;
+            activateEasterEgg();
+            konamiIndex = 0; // Reset the sequence after activation
+        }
+    } else {
+        konamiIndex = 0; // Reset if a wrong key is pressed
+    }
 });
 
 document.addEventListener('keyup', function(e) {
@@ -47,6 +77,37 @@ document.addEventListener('keyup', function(e) {
         upPressed = false;
     }
 });
+
+// Timer logic
+function startTimer() {
+    timerInterval = setInterval(function() {
+        if (!isTimerPaused) {
+            if (timeLeft > 0) {
+                timeLeft -= 0.01;
+                timerDisplay.textContent = `Time: ${timeLeft.toFixed(2)}`;
+            } else {
+                clearInterval(timerInterval);
+                alert('Game Over!');
+                // Additional logic for when the timer ends
+            }
+        }
+    }, 10); // Update every 10ms for smooth countdown
+}
+
+// Start the timer when the game starts
+startTimer();
+
+// Function to pause the timer when the Easter egg is triggered
+function pauseTimer() {
+    isTimerPaused = true;
+    timerDisplay.textContent = "Time: ???"; // Change timer display to "???"
+}
+
+// Function to resume the timer after Easter egg
+function resumeTimer() {
+    isTimerPaused = false;
+    timerDisplay.textContent = `Time: ${timeLeft.toFixed(2)}`; // Resume normal display
+}
 
 // Check for collision with the ring
 function checkCollision() {
@@ -93,21 +154,6 @@ easterEggCharacter.style.zIndex = '9999';
 easterEggCharacter.style.transition = 'left 0.5s ease-out'; // Smooth transition for the peeking effect
 document.body.appendChild(easterEggCharacter);
 
-// Handle Konami Code input
-document.addEventListener('keydown', function(e) {
-    if (e.keyCode === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-            // Konami code completed successfully, trigger Easter egg
-            isKonamiCodeActive = true;
-            activateEasterEgg();
-            konamiIndex = 0; // Reset the sequence after activation
-        }
-    } else {
-        konamiIndex = 0; // Reset if a wrong key is pressed
-    }
-});
-
 // Function to activate the Easter egg
 function activateEasterEgg() {
     if (isKonamiCodeActive) {
@@ -120,7 +166,7 @@ function activateEasterEgg() {
         // Change the ring color to red
         ring.style.backgroundColor = 'red';
 
-         // Change the background color to black
+        // Change the background color to black
         gameContainer.style.backgroundColor = 'black';
         document.body.style.backgroundColor = 'black'; // Change the entire page background to black
         gameContainer.style.backgroundColor = 'grey';
@@ -139,6 +185,14 @@ function activateEasterEgg() {
             ring.style.backgroundColor = ''; // Reset to original color
             gameContainer.style.backgroundColor = '#70C5CE'; // Reset background color
         }, 5000); // 5 seconds to reset the ring color back to normal
+
+        // Pause the timer during the Easter egg effect
+        pauseTimer();
+
+        // Resume the timer after 5 seconds (duration of the Easter egg effect)
+        setTimeout(function() {
+            resumeTimer();
+        }, 5000);
     }
 }
 
@@ -184,14 +238,6 @@ function update() {
             isOnGround = true;
         }
     });
-
-    // Check if Sonic is out of bounds (no longer inside game container)
-    if (sonic.offsetLeft < 0 || sonic.offsetLeft + sonic.offsetWidth > gameContainer.offsetWidth || sonic.offsetTop < 0 || sonic.offsetTop + sonic.offsetHeight > gameContainer.offsetHeight) {
-        // Sonic is out of bounds, disable further triggering of Easter egg
-        if (isKonamiCodeActive) {
-            activateEasterEgg();
-        }
-    }
 
     // Check for collision with the ring
     checkCollision();
