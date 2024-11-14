@@ -115,8 +115,8 @@ function update() {
 
         if (sonicRect.bottom <= platformRect.top && sonicRect.right > platformRect.left && sonicRect.left < platformRect.right) {
             newY = platformRect.top - sonic.offsetHeight;
-            sonicSpeedY = 0;
-            isOnGround = true;
+            sonicSpeedY = movespeed;
+            isOnGround = false;
         }
     });
 
