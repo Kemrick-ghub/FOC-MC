@@ -109,28 +109,28 @@ function update() {
         isOnGround = true;
     }
 
- // Collision with platforms
-platforms.forEach(function(platform) {
-    let platformRect = platform.getBoundingClientRect();
-    let sonicRect = sonic.getBoundingClientRect();
+    // Collision with platforms
+    platforms.forEach(function(platform) {
+        let platformRect = platform.getBoundingClientRect();
+        let sonicRect = sonic.getBoundingClientRect();
 
-    // Check if Sonic is falling and colliding with the platform
-    if (sonicSpeedY > 0 && 
-        sonicRect.bottom <= platformRect.top && 
-        sonicRect.right > platformRect.left && 
-        sonicRect.left < platformRect.right) {
-        
-        // Update Sonic's position and speed
-        newY = platformRect.top - sonic.offsetHeight;
-        sonicSpeedY = 0; // Reset vertical speed
-        isOnGround = true; // Sonic is on the ground
+        // Check if Sonic is falling and colliding with the platform
+        if (sonicSpeedY > 0 && 
+            sonicRect.bottom <= platformRect.top && 
+            sonicRect.right > platformRect.left && 
+            sonicRect.left < platformRect.right) {
+            
+            // Update Sonic's position and speed
+            newY = platformRect.top - sonic.offsetHeight; // Place Sonic on top of the platform
+            sonicSpeedY = 0; // Reset vertical speed
+            isOnGround = true; // Sonic is on the ground
+        }
+    });
+
+    // Reset isOnGround if not on any platform
+    if (!isOnGround) {
+        sonicSpeedY += gravity; // Apply gravity if not on the ground
     }
-});
-
-// Reset isOnGround if not on any platform
-if (!isOnGround) {
-    sonicSpeedY += gravity; // Apply gravity if not on the ground
-}
 
     // Check for collision with the ring
     checkCollision();
