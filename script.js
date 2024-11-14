@@ -5,6 +5,11 @@ const platforms = document.querySelectorAll('.platform');
 const ring = document.getElementById('ring');
 const scoreDisplay = document.getElementById('ring-count'); // Get the score display element
 
+// Get the audio elements
+const backgroundMusic = document.getElementById('background-music');
+const jumpSound = document.getElementById('jump-sound');
+const ringSound = document.getElementById('ring-sound');
+
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
 let isJumping = false; // To track if the character is jumping
@@ -19,6 +24,11 @@ let upPressed = false;
 
 let score = 0; // Score variable to track collected rings
 
+
+// Start the background music when the game starts
+backgroundMusic.play();
+
+
 // Handle keyboard input
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
@@ -27,6 +37,7 @@ document.addEventListener('keydown', function(e) {
         rightPressed = true;
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
+        jumpSound.play(); // Play jump sound when jump is triggered
     }
 });
 
@@ -55,6 +66,7 @@ function checkCollision() {
         score++; // Increase score
         scoreDisplay.textContent = score; // Update the score display
         console.log('Score:', score); // Log score to the console
+        ringSound.play(); // Play ring collection sound
         setTimeout(resetRing, 2000); // Reset ring after 2 seconds
     }
 }
