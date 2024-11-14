@@ -74,6 +74,59 @@ function resetRing() {
     ring.style.left = `${Math.random() * (gameContainer.offsetWidth - 50)}px`; // Random horizontal position
 }
 
+// Konami code detection variables
+let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑ ↑ ↓ ↓ ← → ← → B A
+let konamiIndex = 0;
+let isKonamiCodeActive = false;
+
+// Easter egg character element
+const easterEggCharacter = document.createElement('div');
+easterEggCharacter.id = 'easter-egg';
+easterEggCharacter.style.position = 'absolute';
+easterEggCharacter.style.top = '50%';
+easterEggCharacter.style.left = '-100px'; // Initially hidden off-screen
+easterEggCharacter.style.fontSize = '30px';
+easterEggCharacter.style.fontFamily = 'Arial, sans-serif';
+easterEggCharacter.style.color = 'red';
+easterEggCharacter.style.zIndex = '9999';
+easterEggCharacter.style.transition = 'left 0.5s ease-out'; // Smooth transition for the peeking effect
+document.body.appendChild(easterEggCharacter);
+
+// Handle Konami Code input
+document.addEventListener('keydown', function(e) {
+    if (e.keyCode === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            // Konami code completed successfully, trigger Easter egg
+            isKonamiCodeActive = true;
+            activateEasterEgg();
+            konamiIndex = 0; // Reset the sequence after activation
+        }
+    } else {
+        konamiIndex = 0; // Reset if a wrong key is pressed
+    }
+});
+
+// Function to activate the Easter egg
+function activateEasterEgg() {
+    if (isKonamiCodeActive) {
+        // Move the Easter egg character into view
+        easterEggCharacter.style.left = '10px'; // Peeking from the left side
+
+        // Display the message
+        easterEggCharacter.textContent = "Fun is ∞!";
+
+        // Make the character disappear after 2 seconds
+        setTimeout(function() {
+            easterEggCharacter.style.left = '-100px'; // Move off-screen
+            setTimeout(function() {
+                easterEggCharacter.textContent = ''; // Clear the message
+                isKonamiCodeActive = false;
+            }, 500); // Wait for the animation to finish before clearing the message
+        }, 2000); // Keep the message visible for 2 seconds
+    }
+}
+
 // Update Sonic's position
 function update() {
     // Handle horizontal movement
@@ -116,6 +169,16 @@ function update() {
             isOnGround = true;
         }
     });
+
+        // Check if Sonic is out of bounds and activate the Easter egg if necessary
+    if (sonic.offsetLeft < 0 || sonic.offsetLeft + sonic.offsetWidth > gameContainer.offsetWidth || sonic.offsetTop < 0 || sonic.offsetTop + sonic.offsetHeight > gameContainer.offsetHeight) {
+        // Sonic is out of bounds, Konami code can now be activated
+        if (isKonamiCodeActive) {
+            // Allow Konami code to trigger if Sonic is out of bounds
+            activateEasterEgg();
+        }
+    }
+
 
     // Check for collision with the ring
     checkCollision();
