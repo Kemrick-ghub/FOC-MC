@@ -79,6 +79,9 @@ let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑ ↑ ↓ ↓ �
 let konamiIndex = 0;
 let isKonamiCodeActive = false;
 
+let timer; // Timer variable
+let countdown = 600; // 10 minutes in seconds (600 seconds)
+
 // Easter egg character element
 const easterEggCharacter = document.createElement('div');
 easterEggCharacter.id = 'easter-egg';
@@ -94,6 +97,18 @@ document.body.appendChild(easterEggCharacter);
 
 // Get the game container
 const gameContainer = document.querySelector('.game-container');
+
+// Timer display
+const timerDisplay = document.createElement('div');
+timerDisplay.id = 'timer-display';
+timerDisplay.style.position = 'absolute';
+timerDisplay.style.top = '10px';
+timerDisplay.style.left = '10px';
+timerDisplay.style.fontSize = '24px';
+timerDisplay.style.fontFamily = 'Arial, sans-serif';
+timerDisplay.style.color = '#fff';
+timerDisplay.style.zIndex = '9999';
+document.body.appendChild(timerDisplay);
 
 // Handle Konami Code input
 document.addEventListener('keydown', function(e) {
@@ -126,6 +141,14 @@ function activateEasterEgg() {
         document.body.style.backgroundColor = 'black'; // Change the entire page background to black
         gameContainer.style.backgroundColor = 'grey';
 
+         // Reset the timer to 999 seconds (about 16.5 minutes)
+        countdown = 999
+
+         // Change the timer text to red and apply distortion effect
+        timerDisplay.style.color = 'red';
+        timerDisplay.style.transform = 'scale(1)'; // Reset scale (in case it was distorted previously)
+        applyDistortionEffect();
+
         // Make the character disappear after 2 seconds
         setTimeout(function() {
             easterEggCharacter.style.left = '-100px'; // Move off-screen
@@ -144,6 +167,55 @@ function activateEasterEgg() {
     }
 }
 
+// Apply a distortion effect on the timer text
+function applyDistortionEffect() {
+    setInterval(() => {
+        timerDisplay.style.transform = 'scale(' + (1 + Math.random() * 0.1) + ')';
+    }, 50);
+}
+
+// Timer update function
+function updateTimer() {
+    if (countdown > 0) {
+        countdown--;
+        let minutes = Math.floor(countdown / 60);
+        let seconds = countdown % 60;
+        timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    } else {
+        // Game over when the timer reaches 0
+        showGameOver();
+    }
+}
+
+// Show the Game Over screen
+function showGameOver() {
+    // Display Game Over message
+    const gameOverMessage = document.createElement('div');
+    gameOverMessage.id = 'game-over';
+    gameOverMessage.style.position = 'absolute';
+    gameOverMessage.style.top = '50%';
+    gameOverMessage.style.left = '50%';
+    gameOverMessage.style.transform = 'translate(-50%, -50%)';
+    gameOverMessage.style.fontSize = '48px';
+    gameOverMessage.style.fontFamily = 'Arial, sans-serif';
+    gameOverMessage.style.color = 'white';
+    gameOverMessage.style.zIndex = '9999';
+    gameOverMessage.textContent = 'GAME OVER';
+    document.body.appendChild(gameOverMessage);
+
+    // Redirect to "aboutme.html" after 3 seconds
+    setTimeout(function() {
+        window.location.href = 'aboutme.html';
+    }, 3000);
+}
+
+// Start the timer countdown
+function startTimer() {
+    setInterval(updateTimer, 1000); // Update every second
+}
+
+// Start the timer when the game begins
+startTimer();
 
 // Update Sonic's position
 function update() {
