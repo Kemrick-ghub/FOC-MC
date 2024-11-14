@@ -119,6 +119,9 @@ function activateEasterEgg() {
         // Change the ring color to red
         ring.style.backgroundColor = 'red';
 
+         // Change the background color to black
+        gameContainer.style.backgroundColor = 'black';
+
         // Make the character disappear after 2 seconds
         setTimeout(function() {
             easterEggCharacter.style.left = '-100px'; // Move off-screen
@@ -131,6 +134,7 @@ function activateEasterEgg() {
         // Reset ring color after 5 seconds
         setTimeout(function() {
             ring.style.backgroundColor = ''; // Reset to original color
+            gameContainer.style.backgroundColor = '#70C5CE'; // Reset background color
         }, 5000); // 5 seconds to reset the ring color back to normal
     }
 }
