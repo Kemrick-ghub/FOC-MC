@@ -25,6 +25,7 @@ let score = 0; // Score variable to track collected rings
 
 // Start the background music when the game starts
 backgroundMusic.play();
+
 // Handle keyboard input
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
@@ -92,8 +93,6 @@ easterEggCharacter.style.zIndex = '9999';
 easterEggCharacter.style.transition = 'left 0.5s ease-out'; // Smooth transition for the peeking effect
 document.body.appendChild(easterEggCharacter);
 
-// Get the game container
-const gameContainer = document.querySelector('.game-container');
 // Handle Konami Code input
 document.addEventListener('keydown', function(e) {
     if (e.keyCode === konamiCode[konamiIndex]) {
@@ -138,12 +137,10 @@ function activateEasterEgg() {
         // Reset ring color after 5 seconds
         setTimeout(function() {
             ring.style.backgroundColor = ''; // Reset to original color
-           // document.body.style.backgroundColor = '#70C5CE';
             gameContainer.style.backgroundColor = '#70C5CE'; // Reset background color
         }, 5000); // 5 seconds to reset the ring color back to normal
     }
 }
-
 
 // Update Sonic's position
 function update() {
@@ -188,15 +185,13 @@ function update() {
         }
     });
 
-        // Check if Sonic is out of bounds and activate the Easter egg if necessary
+    // Check if Sonic is out of bounds (no longer inside game container)
     if (sonic.offsetLeft < 0 || sonic.offsetLeft + sonic.offsetWidth > gameContainer.offsetWidth || sonic.offsetTop < 0 || sonic.offsetTop + sonic.offsetHeight > gameContainer.offsetHeight) {
-        // Sonic is out of bounds, Konami code can now be activated
+        // Sonic is out of bounds, disable further triggering of Easter egg
         if (isKonamiCodeActive) {
-            // Allow Konami code to trigger if Sonic is out of bounds
             activateEasterEgg();
         }
     }
-
 
     // Check for collision with the ring
     checkCollision();
