@@ -10,6 +10,7 @@ const backgroundMusic = document.getElementById('background-music');
 const jumpSound = document.getElementById('jump-sound');
 const ringSound = document.getElementById('ring-sound');
 
+
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
 let isJumping = false; // To track if the character is jumping
@@ -35,7 +36,7 @@ document.addEventListener('keydown', function(e) {
         rightPressed = true;
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
-        jumpSound.play(); // Play jump sound when jump is triggered
+		jumpSound.play(); // Play jump sound when jump is triggered
     }
 });
 
