@@ -104,7 +104,7 @@ function update() {
     // Collision with ground
     if (newY >= gameContainer.offsetHeight - sonic.offsetHeight - 20) { // 20px is the ground height
         newY = gameContainer.offsetHeight - sonic.offsetHeight - 20;
-        sonicSpeedY = movespeed;
+        sonicSpeedY = 0;
         isOnGround = true;
     }
 
