@@ -10,6 +10,7 @@ const backgroundMusic = document.getElementById('background-music');
 const jumpSound = document.getElementById('jump-sound');
 const ringSound = document.getElementById('ring-sound');
 
+
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
 let isJumping = false; // To track if the character is jumping
@@ -22,12 +23,10 @@ let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
 
-let score = 0; // Score variable to track collected rings
-
+let score = 0; // Score variable to track collected rings 
 
 // Start the background music when the game starts
 backgroundMusic.play();
-
 
 // Handle keyboard input
 document.addEventListener('keydown', function(e) {
@@ -37,7 +36,7 @@ document.addEventListener('keydown', function(e) {
         rightPressed = true;
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
-        jumpSound.play(); // Play jump sound when jump is triggered
+		jumpSound.play(); // Play jump sound when jump is triggered
     }
 });
 
@@ -114,23 +113,12 @@ function update() {
         let platformRect = platform.getBoundingClientRect();
         let sonicRect = sonic.getBoundingClientRect();
 
-        // Check if Sonic is falling and colliding with the platform
-        if (sonicSpeedY > 0 && 
-            sonicRect.bottom <= platformRect.top && 
-            sonicRect.right > platformRect.left && 
-            sonicRect.left < platformRect.right) {
-            
-            // Update Sonic's position and speed
-            newY = platformRect.top - sonic.offsetHeight; // Place Sonic on top of the platform
-            sonicSpeedY = 0; // Reset vertical speed
-            isOnGround = true; // Sonic is on the ground
+        if (sonicRect.bottom <= platformRect.top && sonicRect.right > platformRect.left && sonicRect.left < platformRect.right) {
+            newY = platformRect.top - sonic.offsetHeight;
+            sonicSpeedY = 0;
+            isOnGround = true;
         }
     });
-
-    // Reset isOnGround if not on any platform
-    if (!isOnGround) {
-        sonicSpeedY += gravity; // Apply gravity if not on the ground
-    }
 
     // Check for collision with the ring
     checkCollision();
