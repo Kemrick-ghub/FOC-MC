@@ -116,6 +116,9 @@ function activateEasterEgg() {
         // Display the message
         easterEggCharacter.textContent = "Fun is ∞!";
 
+        // Change the ring color to red
+        ring.style.backgroundColor = 'red';
+
         // Make the character disappear after 2 seconds
         setTimeout(function() {
             easterEggCharacter.style.left = '-100px'; // Move off-screen
@@ -124,8 +127,14 @@ function activateEasterEgg() {
                 isKonamiCodeActive = false;
             }, 500); // Wait for the animation to finish before clearing the message
         }, 2000); // Keep the message visible for 2 seconds
+
+        // Reset ring color after 5 seconds
+        setTimeout(function() {
+            ring.style.backgroundColor = ''; // Reset to original color
+        }, 5000); // 5 seconds to reset the ring color back to normal
     }
 }
+
 
 // Update Sonic's position
 function update() {
