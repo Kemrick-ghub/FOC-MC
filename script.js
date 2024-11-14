@@ -9,8 +9,6 @@ const scoreDisplay = document.getElementById('ring-count'); // Get the score dis
 const backgroundMusic = document.getElementById('background-music');
 const jumpSound = document.getElementById('jump-sound');
 const ringSound = document.getElementById('ring-sound');
-
-
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
 let isJumping = false; // To track if the character is jumping
@@ -23,11 +21,10 @@ let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
 
-let score = 0; // Score variable to track collected rings 
+let score = 0; // Score variable to track collected rings
 
 // Start the background music when the game starts
 backgroundMusic.play();
-
 // Handle keyboard input
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
@@ -36,7 +33,7 @@ document.addEventListener('keydown', function(e) {
         rightPressed = true;
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
-		jumpSound.play(); // Play jump sound when jump is triggered
+        jumpSound.play(); // Play jump sound when jump is triggered
     }
 });
 
