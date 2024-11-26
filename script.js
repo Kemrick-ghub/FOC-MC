@@ -22,7 +22,8 @@ const gravity = 0.5; // Simulate gravity
 const jumpStrength = 15; // How strong the jump is
 const moveSpeed = 5; // Horizontal movement speed
 const maxSpinDashSpeed = 20; // Max speed for spin dash
-let spinDashSpeed = 1; // Current spin dash charge
+let spinDashSpeed = 0; // Current spin dash charge
+
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
@@ -90,6 +91,21 @@ document.addEventListener('keyup', function(e) {
         upPressed = false;
     } else if (e.key === 'ArrowDown') {
         downPressed = false; // Stop charging when down is released
+    }
+});
+
+
+document.addEventListener('keyup', function(e) {
+    if (e.key === 'ArrowLeft') {
+        leftPressed = false;
+    } else if (e.key === 'ArrowRight') {
+        rightPressed = false;
+    } else if (e.key === 'ArrowUp') {
+        upPressed = false;
+    } else if (e.key === 'ArrowDown') {
+        downPressed = false; // Stop charging when down is released
+    } else if (e.key === ' ') {
+        spacePressed = false; // Space bar released
     }
 });
 
@@ -167,7 +183,7 @@ function triggerExplosion() {
 
     // Display the explosion message
     explosionMessage.textContent = "Sonic Exploded! He lost his legs!";
-	 explosionMessage.style.opacity = 1; // Make the message visible
+    explosionMessage.style.opacity = 1; // Make the message visible
 
     // Reset the game after explosion effect
     setTimeout(function() {
@@ -212,8 +228,9 @@ function update() {
         sonicSpeedY = -jumpStrength;
         isOnGround = false;
     }
+
     // Handle Spin Dash charging
-	if (downPressed) {
+    if (downPressed) {
         spinDashSpeed += 1; // Charge the spin dash
         if (spinDashSpeed > maxSpinDashSpeed) spinDashSpeed = maxSpinDashSpeed; // Limit max speed
     }
@@ -222,7 +239,7 @@ function update() {
         // Play spin dash sound when charged
         spinDashSound.play();
         sonicSpeedX = spinDashSpeed * (rightPressed ? 1 : -1); // Move Sonic faster in the direction pressed
-		 spinDashSpeed = 0; // Reset spin dash speed after use
+        spinDashSpeed = 0; // Reset spin dash speed after use
     }
 
     // Apply gravity
