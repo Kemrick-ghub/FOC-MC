@@ -16,10 +16,14 @@ let isOnGround = true; // To detect if the character is on the ground
 const gravity = 0.5; // Simulate gravity
 const jumpStrength = 15; // How strong the jump is
 const moveSpeed = 5; // Horizontal movement speed
+const maxSpinDashSpeed = 20; // Max speed for spin dash
+let spinDashSpeed = 0; // Current spin dash charge
 
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
+let downPressed = false;
+let spacePressed = false;
 
 let score = 0; // Score variable to track collected rings
 
@@ -52,19 +56,10 @@ document.addEventListener('keydown', function(e) {
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
         jumpSound.play(); // Play jump sound when jump is triggered
-    }
-
-    // Handle Konami Code input
-    if (e.keyCode === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-            // Konami code completed successfully, trigger Easter egg
-            isKonamiCodeActive = true;
-            activateEasterEgg();
-            konamiIndex = 0; // Reset the sequence after activation
-        }
-    } else {
-        konamiIndex = 0; // Reset if a wrong key is pressed
+    } else if (e.key === 'ArrowDown') {
+        downPressed = true; // Start charging the spin dash
+    } else if (e.key === ' ' && downPressed) {
+        spacePressed = true; // Space bar triggers the spin dash
     }
 });
 
@@ -75,6 +70,10 @@ document.addEventListener('keyup', function(e) {
         rightPressed = false;
     } else if (e.key === 'ArrowUp') {
         upPressed = false;
+    } else if (e.key === 'ArrowDown') {
+        downPressed = false; // Stop charging when down is released
+    } else if (e.key === ' ') {
+        spacePressed = false; // Space bar released
     }
 });
 
@@ -88,7 +87,6 @@ function startTimer() {
             } else {
                 clearInterval(timerInterval);
                 alert('Game Over!');
-                // Additional logic for when the timer ends
             }
         }
     }, 10); // Update every 10ms for smooth countdown
@@ -136,66 +134,6 @@ function resetRing() {
     ring.style.left = `${Math.random() * (gameContainer.offsetWidth - 50)}px`; // Random horizontal position
 }
 
-// Konami code detection variables
-let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑ ↑ ↓ ↓ ← → ← → B A
-let konamiIndex = 0;
-let isKonamiCodeActive = false;
-
-// Easter egg character element
-const easterEggCharacter = document.createElement('div');
-easterEggCharacter.id = 'easter-egg';
-easterEggCharacter.style.position = 'absolute';
-easterEggCharacter.style.top = '50%';
-easterEggCharacter.style.left = '-100px'; // Initially hidden off-screen
-easterEggCharacter.style.fontSize = '30px';
-easterEggCharacter.style.fontFamily = 'Arial, sans-serif';
-easterEggCharacter.style.color = 'red';
-easterEggCharacter.style.zIndex = '9999';
-easterEggCharacter.style.transition = 'left 0.5s ease-out'; // Smooth transition for the peeking effect
-document.body.appendChild(easterEggCharacter);
-
-// Function to activate the Easter egg
-function activateEasterEgg() {
-    if (isKonamiCodeActive) {
-        // Move the Easter egg character into view
-        easterEggCharacter.style.left = '10px'; // Peeking from the left side
-
-        // Display the message
-        easterEggCharacter.textContent = "Fun is ∞!";
-
-        // Change the ring color to red
-        ring.style.backgroundColor = 'red';
-
-        // Change the background color to black
-        gameContainer.style.backgroundColor = 'black';
-        document.body.style.backgroundColor = 'black'; // Change the entire page background to black
-        gameContainer.style.backgroundColor = 'grey';
-
-        // Make the character disappear after 2 seconds
-        setTimeout(function() {
-            easterEggCharacter.style.left = '-100px'; // Move off-screen
-            setTimeout(function() {
-                easterEggCharacter.textContent = ''; // Clear the message
-                isKonamiCodeActive = false;
-            }, 500); // Wait for the animation to finish before clearing the message
-        }, 2000); // Keep the message visible for 2 seconds
-
-        // Reset ring color after 5 seconds
-        setTimeout(function() {
-            ring.style.backgroundColor = ''; // Reset to original color
-            gameContainer.style.backgroundColor = '#70C5CE'; // Reset background color
-        }, 5000); // 5 seconds to reset the ring color back to normal
-
-        // Pause the timer during the Easter egg effect
-        pauseTimer();
-
-        // Resume the timer after 5 seconds (duration of the Easter egg effect)
-        setTimeout(function() {
-            resumeTimer();
-        }, 5000);
-    }
-}
-
 // Update Sonic's position
 function update() {
     // Handle horizontal movement
@@ -211,6 +149,19 @@ function update() {
     if (upPressed && isOnGround) {
         sonicSpeedY = -jumpStrength;
         isOnGround = false;
+    }
+
+    // Handle Spin Dash charging
+    if (downPressed && !spacePressed) {
+        if (spinDashSpeed < maxSpinDashSpeed) {
+            spinDashSpeed += 0.2; // Gradually increase speed
+        }
+    }
+
+    // Activate Spin Dash when space is pressed
+    if (spacePressed) {
+        sonicSpeedX = spinDashSpeed * (leftPressed ? -1 : 1); // Apply the spin dash speed
+        spinDashSpeed = 0; // Reset the spin dash charge after activation
     }
 
     // Apply gravity
