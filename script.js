@@ -9,6 +9,9 @@ const scoreDisplay = document.getElementById('ring-count'); // Get the score dis
 const backgroundMusic = document.getElementById('background-music');
 const jumpSound = document.getElementById('jump-sound');
 const ringSound = document.getElementById('ring-sound');
+const spinDashSound = new Audio('spin-dash-sound.mp3'); // Add your spin dash sound file here
+spinDashSound.volume = 0.5; // Adjust the volume if necessary
+
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
 let isJumping = false; // To track if the character is jumping
@@ -161,6 +164,7 @@ function update() {
     // Activate Spin Dash when space is pressed
     if (spacePressed) {
         sonicSpeedX = spinDashSpeed * (leftPressed ? -1 : 1); // Apply the spin dash speed
+        spinDashSound.play(); // Play the spin dash sound
         spinDashSpeed = 0; // Reset the spin dash charge after activation
     }
 
