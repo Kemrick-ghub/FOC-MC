@@ -9,8 +9,10 @@ const scoreDisplay = document.getElementById('ring-count'); // Get the score dis
 const backgroundMusic = document.getElementById('background-music');
 const jumpSound = document.getElementById('jump-sound');
 const ringSound = document.getElementById('ring-sound');
-const spinDashSound = new Audio('spin-dash-sound.mp3'); // Add your spin dash sound file here
+const spinDashSound = new Audio('spin-dash-sound.mp3'); 
 spinDashSound.volume = 0.5; // Adjust the volume if necessary
+const explosionSound = new Audio('explosion-sound.mp3'); 
+explosionSound.volume = 0.8; // Adjust the volume if necessary
 
 let sonicSpeedX = 0; // Horizontal speed
 let sonicSpeedY = 0; // Vertical speed
@@ -29,6 +31,7 @@ let downPressed = false;
 let spacePressed = false;
 
 let score = 0; // Score variable to track collected rings
+const explosionThreshold = 10; // Set the score threshold for explosion
 
 // Timer variables
 let timeLeft = 1000; // Start the timer at 10 seconds
@@ -46,6 +49,19 @@ timerDisplay.style.color = 'white';
 timerDisplay.style.zIndex = '9999';
 timerDisplay.textContent = `Time: ${timeLeft.toFixed(2)}`;
 document.body.appendChild(timerDisplay);
+
+// Create the explosion message element
+const explosionMessage = document.createElement('div');
+explosionMessage.style.position = 'absolute';
+explosionMessage.style.top = '50%';
+explosionMessage.style.left = '50%';
+explosionMessage.style.transform = 'translate(-50%, -50%)';
+explosionMessage.style.fontSize = '40px';
+explosionMessage.style.color = 'red';
+explosionMessage.style.fontWeight = 'bold';
+explosionMessage.style.zIndex = '10000';
+explosionMessage.style.opacity = 0; // Initially hidden
+document.body.appendChild(explosionMessage);
 
 // Start the background music when the game starts
 backgroundMusic.play();
@@ -127,6 +143,11 @@ function checkCollision() {
         console.log('Score:', score); // Log score to the console
         ringSound.play(); // Play ring collection sound
         setTimeout(resetRing, 2000); // Reset ring after 2 seconds
+
+        // Check if Sonic should explode after collecting enough rings
+        if (score >= explosionThreshold) {
+            triggerExplosion();
+        }
     }
 }
 
@@ -135,6 +156,47 @@ function resetRing() {
     ring.style.display = 'block'; // Show the ring again
     ring.style.top = `${Math.random() * (gameContainer.offsetHeight - 50)}px`; // Random vertical position
     ring.style.left = `${Math.random() * (gameContainer.offsetWidth - 50)}px`; // Random horizontal position
+}
+
+// Trigger the explosion effect
+function triggerExplosion() {
+    // Play the explosion sound
+    explosionSound.play();
+
+    // Change Sonic's appearance to simulate an explosion
+    sonic.style.transition = 'all 0.5s ease-out'; // Smooth transition
+    sonic.style.transform = 'scale(2)'; // Make Sonic larger
+    sonic.style.opacity = 0; // Make Sonic fade out
+
+    // Display the explosion message
+    explosionMessage.textContent = "Sonic Exploded! He lost his legs!";
+    explosionMessage.style.opacity = 1; // Make the message visible
+
+    // Reset the game after explosion effect
+    setTimeout(function() {
+        resetGame();
+    }, 1000); // Wait for the explosion effect to finish before resetting
+}
+
+// Reset the game
+function resetGame() {
+    // Reset score and Sonic position
+    score = 0;
+    scoreDisplay.textContent = score;
+    sonic.style.left = '50px'; // Reset Sonic's position (adjust as needed)
+    sonic.style.top = '300px'; // Reset Sonic's position (adjust as needed)
+    sonic.style.transform = 'scale(1)'; // Reset Sonic's size
+    sonic.style.opacity = 1; // Reset Sonic's opacity
+
+    // Hide the explosion effect and reset the ring
+    ring.style.display = 'block'; // Show the ring again
+    ring.style.top = `${Math.random() * (gameContainer.offsetHeight - 50)}px`; // Random vertical position
+    ring.style.left = `${Math.random() * (gameContainer.offsetWidth - 50)}px`; // Random horizontal position
+
+    // Hide the explosion message after 2 seconds
+    setTimeout(function() {
+        explosionMessage.style.opacity = 0;
+    }, 2000); // Hide the message after 2 seconds
 }
 
 // Update Sonic's position
@@ -155,17 +217,16 @@ function update() {
     }
 
     // Handle Spin Dash charging
-    if (downPressed && !spacePressed) {
-        if (spinDashSpeed < maxSpinDashSpeed) {
-            spinDashSpeed += 0.2; // Gradually increase speed
-        }
+    if (downPressed) {
+        spinDashSpeed += 1; // Charge the spin dash
+        if (spinDashSpeed > maxSpinDashSpeed) spinDashSpeed = maxSpinDashSpeed; // Limit max speed
     }
 
-    // Activate Spin Dash when space is pressed
-    if (spacePressed) {
-        sonicSpeedX = spinDashSpeed * (leftPressed ? -1 : 1); // Apply the spin dash speed
-        spinDashSound.play(); // Play the spin dash sound
-        spinDashSpeed = 0; // Reset the spin dash charge after activation
+    if (spacePressed && spinDashSpeed > 0) {
+        // Play spin dash sound when charged
+        spinDashSound.play();
+        sonicSpeedX = spinDashSpeed * (rightPressed ? 1 : -1); // Move Sonic faster in the direction pressed
+        spinDashSpeed = 0; // Reset spin dash speed after use
     }
 
     // Apply gravity
