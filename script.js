@@ -95,20 +95,6 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-document.addEventListener('keyup', function(e) {
-    if (e.key === 'ArrowLeft') {
-        leftPressed = false;
-    } else if (e.key === 'ArrowRight') {
-        rightPressed = false;
-    } else if (e.key === 'ArrowUp') {
-        upPressed = false;
-    } else if (e.key === 'ArrowDown') {
-        downPressed = false; // Stop charging when down is released
-    } else if (e.key === ' ') {
-        spacePressed = false; // Space bar released
-    }
-});
-
 // Timer logic
 function startTimer() {
     timerInterval = setInterval(function() {
