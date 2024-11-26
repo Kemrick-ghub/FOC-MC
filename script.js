@@ -70,17 +70,30 @@ backgroundMusic.play();
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
         leftPressed = true;
+        spinDashDirection = -1; // Set the spin dash direction to left
     } else if (e.key === 'ArrowRight') {
         rightPressed = true;
+        spinDashDirection = 1; // Set the spin dash direction to right
     } else if (e.key === 'ArrowUp' && isOnGround) {
         upPressed = true;
         jumpSound.play(); // Play jump sound when jump is triggered
     } else if (e.key === 'ArrowDown') {
         downPressed = true; // Start charging the spin dash
-    } else if (e.key === ' ' && downPressed) {
-        spacePressed = true; // Space bar triggers the spin dash
     }
 });
+
+document.addEventListener('keyup', function(e) {
+    if (e.key === 'ArrowLeft') {
+        leftPressed = false;
+    } else if (e.key === 'ArrowRight') {
+        rightPressed = false;
+    } else if (e.key === 'ArrowUp') {
+        upPressed = false;
+    } else if (e.key === 'ArrowDown') {
+        downPressed = false; // Stop charging when down is released
+    }
+});
+
 
 document.addEventListener('keyup', function(e) {
     if (e.key === 'ArrowLeft') {
