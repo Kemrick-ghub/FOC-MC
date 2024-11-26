@@ -249,7 +249,7 @@ function update() {
         let sonicRect = sonic.getBoundingClientRect();
 
         if (sonicRect.bottom <= platformRect.top && sonicRect.right > platformRect.left && sonicRect.left < platformRect.right) {
-            newY = platformRect.top - sonic.offsetHeight;
+            newY = platformRect.top + sonic.offsetHeight;
             sonicSpeedY = 0;
             isOnGround = true;
         }
