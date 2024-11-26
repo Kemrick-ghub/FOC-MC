@@ -45,7 +45,7 @@ body {
 .platform {
     position: absolute;
     width: 100px;
-    height: 20px;
+    height: 50px;
     background-color: #B87333; /* Platform color */
     border-radius: 3px;
 }
