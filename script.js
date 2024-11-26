@@ -167,7 +167,7 @@ function triggerExplosion() {
     sonic.style.opacity = 0; // Make Sonic fade out
 
     // Display the explosion message
-    explosionMessage.textContent = "Sonic Exploded!";
+    explosionMessage.textContent = "Sonic Exploded! He lost his legs!";
     explosionMessage.style.opacity = 1; // Make the message visible
 
     // Reset the game after explosion effect
