@@ -21,8 +21,8 @@ let isOnGround = true; // To detect if the character is on the ground
 const gravity = 0.5; // Simulate gravity
 const jumpStrength = 15; // How strong the jump is
 const moveSpeed = 5; // Horizontal movement speed
-const maxSpinDashSpeed = 20; // Max speed for spin dash
-let spinDashSpeed = 1; // Current spin dash charge
+let spinDashSpeed = 0; // Current spin dash charge (starts at 0)
+let spinDashDirection = 0; // Direction Sonic is facing for spin dash (1 for right, -1 for left)
 
 let leftPressed = false;
 let rightPressed = false;
@@ -93,7 +93,6 @@ document.addEventListener('keyup', function(e) {
         downPressed = false; // Stop charging when down is released
     }
 });
-
 
 // Timer logic
 function startTimer() {
@@ -168,7 +167,7 @@ function triggerExplosion() {
     sonic.style.opacity = 0; // Make Sonic fade out
 
     // Display the explosion message
-    explosionMessage.textContent = "Sonic Exploded! He lost his legs!";
+    explosionMessage.textContent = "Sonic Exploded!";
     explosionMessage.style.opacity = 1; // Make the message visible
 
     // Reset the game after explosion effect
@@ -209,22 +208,15 @@ function update() {
         sonicSpeedX = 0;
     }
 
-    // Handle jumping
-    if (upPressed && isOnGround) {
-        sonicSpeedY = -jumpStrength;
-        isOnGround = false;
-    }
-
-    // Handle Spin Dash charging
+    // Handle spin dash charging
     if (downPressed) {
         spinDashSpeed += 1; // Charge the spin dash
-        if (spinDashSpeed > maxSpinDashSpeed) spinDashSpeed = maxSpinDashSpeed; // Limit max speed
     }
 
     if (spacePressed && spinDashSpeed > 0) {
         // Play spin dash sound when charged
         spinDashSound.play();
-        sonicSpeedX = spinDashSpeed * (rightPressed ? 1 : -1); // Move Sonic faster in the direction pressed
+        sonicSpeedX = spinDashSpeed * spinDashDirection; // Move Sonic faster in the direction pressed
         spinDashSpeed = 0; // Reset spin dash speed after use
     }
 
