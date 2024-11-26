@@ -22,7 +22,7 @@ const gravity = 0.5; // Simulate gravity
 const jumpStrength = 15; // How strong the jump is
 const moveSpeed = 5; // Horizontal movement speed
 const maxSpinDashSpeed = 20; // Max speed for spin dash
-let spinDashSpeed = 0; // Current spin dash charge
+let spinDashSpeed = 1; // Current spin dash charge
 
 let leftPressed = false;
 let rightPressed = false;
